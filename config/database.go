@@ -5,8 +5,9 @@ import (
 	"log"
 	"os"
 
+	"go-tuku-shop-api/migration"
+
 	"github.com/joho/godotenv"
-	"gitlab.com/altrawan/final-project-bds-sanbercode-golang-batch-37/migration"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )

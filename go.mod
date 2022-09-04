@@ -1,7 +1,7 @@
-module gitlab.com/altrawan/final-project-bds-sanbercode-golang-batch-37
+module go-tuku-shop-api
 
-// +heroku goVersion go1.17
-go 1.17
+// +heroku goVersion go1.18
+go 1.18
 
 require (
 	github.com/gin-gonic/gin v1.8.1

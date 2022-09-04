@@ -3,13 +3,17 @@ package repository
 import (
 	"time"
 
-	"gitlab.com/altrawan/final-project-bds-sanbercode-golang-batch-37/entity"
+	"go-tuku-shop-api/entity"
+	"go-tuku-shop-api/helper"
+
 	"gorm.io/gorm"
 )
 
 type ProfileRepository interface {
-	Update(u entity.User, p entity.Profile) (entity.User, entity.Profile)
+	List() []entity.Profile
 	FindByID(profileID uint64) entity.Profile
+	Update(u entity.User, p entity.Profile) (entity.User, entity.Profile)
+	ChangePassword(u entity.User) entity.User
 }
 
 type iProfileRepository struct {
@@ -18,6 +22,18 @@ type iProfileRepository struct {
 
 func NewProfileRepository(db *gorm.DB) ProfileRepository {
 	return &iProfileRepository{db}
+}
+
+func (db *iProfileRepository) List() []entity.Profile {
+	var profiles []entity.Profile
+	db.connection.Preload("Profiles").Find(&profiles)
+	return profiles
+}
+
+func (db *iProfileRepository) FindByID(profileID uint64) entity.Profile {
+	var profile entity.Profile
+	db.connection.Preload("Profiles").Find(&profile, profileID)
+	return profile
 }
 
 func (db *iProfileRepository) Update(u entity.User, p entity.Profile) (entity.User, entity.Profile) {
@@ -36,8 +52,9 @@ func (db *iProfileRepository) Update(u entity.User, p entity.Profile) (entity.Us
 	return u, p
 }
 
-func (db *iProfileRepository) FindByID(profileID uint64) entity.Profile {
-	var profile entity.Profile
-	db.connection.Preload("Profiles").Find(&profile, profileID)
-	return profile
+func (db *iProfileRepository) ChangePassword(u entity.User) entity.User {
+	var user entity.User
+	user.Password = helper.HashAndSalt([]byte(u.Password))
+	db.connection.Where("id = ?", u.ID).Model(&u).Updates(user)
+	return u
 }

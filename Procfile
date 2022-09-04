@@ -1,1 +1,1 @@
-web: bin/gitlab.com/altrawan/final-project-bds-sanbercode-golang-batch-37
+web: bin/go-tuku-shop-api

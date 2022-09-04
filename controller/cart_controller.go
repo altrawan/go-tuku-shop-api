@@ -1,6 +1,6 @@
 package controller
 
-import "gitlab.com/altrawan/final-project-bds-sanbercode-golang-batch-37/service"
+import "go-tuku-shop-api/service"
 
 type CartController interface {
 }

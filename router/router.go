@@ -3,12 +3,13 @@ package router
 import (
 	"os"
 
+	"go-tuku-shop-api/controller"
+	"go-tuku-shop-api/docs"
+	"go-tuku-shop-api/middleware"
+	"go-tuku-shop-api/repository"
+	"go-tuku-shop-api/service"
+
 	"github.com/gin-gonic/gin"
-	"gitlab.com/altrawan/final-project-bds-sanbercode-golang-batch-37/controller"
-	"gitlab.com/altrawan/final-project-bds-sanbercode-golang-batch-37/docs"
-	"gitlab.com/altrawan/final-project-bds-sanbercode-golang-batch-37/middleware"
-	"gitlab.com/altrawan/final-project-bds-sanbercode-golang-batch-37/repository"
-	"gitlab.com/altrawan/final-project-bds-sanbercode-golang-batch-37/service"
 	"gorm.io/gorm"
 
 	swaggerFiles "github.com/swaggo/files"
@@ -137,10 +138,10 @@ func NewRouter(db *gorm.DB) *gin.Engine {
 
 	profileRoutes := v1.Group("/profile")
 	{
-		// profileRoutes.GET("/", profileController.List)
-		// profileRoutes.GET("/:id", profileController.Detail)
-		profileRoutes.PUT("/:id", profileController.Update)
-		// profileRoutes.DELETE("/change-password", profileController.ChangePassword)
+		profileRoutes.GET("/", profileController.List)
+		profileRoutes.GET("/:id", profileController.Detail)
+		profileRoutes.Use(middleware.JwtAuth()).PUT("/:id", profileController.Update)
+		profileRoutes.Use(middleware.JwtAuth()).PUT("/change-password", profileController.ChangePassword)
 	}
 
 	storeRoutes := v1.Group("/store")

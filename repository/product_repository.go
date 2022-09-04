@@ -1,7 +1,8 @@
 package repository
 
 import (
-	"gitlab.com/altrawan/final-project-bds-sanbercode-golang-batch-37/entity"
+	"go-tuku-shop-api/entity"
+
 	"gorm.io/gorm"
 )
 

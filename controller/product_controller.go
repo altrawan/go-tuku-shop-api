@@ -3,10 +3,11 @@ package controller
 import (
 	"net/http"
 
+	"go-tuku-shop-api/entity"
+	"go-tuku-shop-api/helper"
+	"go-tuku-shop-api/service"
+
 	"github.com/gin-gonic/gin"
-	"gitlab.com/altrawan/final-project-bds-sanbercode-golang-batch-37/entity"
-	"gitlab.com/altrawan/final-project-bds-sanbercode-golang-batch-37/helper"
-	"gitlab.com/altrawan/final-project-bds-sanbercode-golang-batch-37/service"
 )
 
 type ProductController interface {

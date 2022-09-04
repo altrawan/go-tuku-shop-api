@@ -1,8 +1,8 @@
 package service
 
 import (
-	"gitlab.com/altrawan/final-project-bds-sanbercode-golang-batch-37/entity"
-	"gitlab.com/altrawan/final-project-bds-sanbercode-golang-batch-37/repository"
+	"go-tuku-shop-api/entity"
+	"go-tuku-shop-api/repository"
 )
 
 type ProductService interface {

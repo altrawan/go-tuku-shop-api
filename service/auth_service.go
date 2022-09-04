@@ -3,11 +3,12 @@ package service
 import (
 	"log"
 
+	"go-tuku-shop-api/dto"
+	"go-tuku-shop-api/entity"
+	"go-tuku-shop-api/helper"
+	"go-tuku-shop-api/repository"
+
 	"github.com/mashingan/smapping"
-	"gitlab.com/altrawan/final-project-bds-sanbercode-golang-batch-37/dto"
-	"gitlab.com/altrawan/final-project-bds-sanbercode-golang-batch-37/entity"
-	"gitlab.com/altrawan/final-project-bds-sanbercode-golang-batch-37/helper"
-	"gitlab.com/altrawan/final-project-bds-sanbercode-golang-batch-37/repository"
 )
 
 type AuthService interface {

@@ -3,9 +3,10 @@ package middleware
 import (
 	"net/http"
 
+	"go-tuku-shop-api/helper"
+	"go-tuku-shop-api/security/token"
+
 	"github.com/gin-gonic/gin"
-	"gitlab.com/altrawan/final-project-bds-sanbercode-golang-batch-37/helper"
-	"gitlab.com/altrawan/final-project-bds-sanbercode-golang-batch-37/security/token"
 )
 
 func JwtAuth() gin.HandlerFunc {

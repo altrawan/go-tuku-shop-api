@@ -1,8 +1,8 @@
 package main
 
 import (
-	"gitlab.com/altrawan/final-project-bds-sanbercode-golang-batch-37/config"
-	"gitlab.com/altrawan/final-project-bds-sanbercode-golang-batch-37/router"
+	"go-tuku-shop-api/config"
+	"go-tuku-shop-api/router"
 )
 
 func main() {

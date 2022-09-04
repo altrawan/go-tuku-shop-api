@@ -1,15 +1,1149 @@
+definitions:
+  dto.BrandCreateDTO:
+    properties:
+      brand_name:
+        type: string
+      photo:
+        type: string
+    required:
+    - brand_name
+    type: object
+  dto.BrandUpdateDTO:
+    properties:
+      brand_name:
+        type: string
+      id:
+        type: integer
+      photo:
+        type: string
+    required:
+    - brand_name
+    type: object
+  dto.CartCreateDTO:
+    properties:
+      product_id:
+        type: string
+      qty:
+        type: string
+    required:
+    - product_id
+    - qty
+    type: object
+  dto.CartUpdateDTO:
+    properties:
+      id:
+        type: integer
+      product_id:
+        type: string
+      qty:
+        type: string
+    required:
+    - product_id
+    - qty
+    type: object
+  dto.CategoryCreateDTO:
+    properties:
+      category_name:
+        type: string
+      photo:
+        type: string
+    required:
+    - category_name
+    type: object
+  dto.CategoryUpdateDTO:
+    properties:
+      category_name:
+        type: string
+      id:
+        type: integer
+      photo:
+        type: string
+    required:
+    - category_name
+    type: object
+  dto.LoginDTO:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  dto.ProductColorDTO:
+    properties:
+      color_name:
+        type: string
+      color_value:
+        type: string
+    type: object
+  dto.ProductCreateDTO:
+    properties:
+      Product_name:
+        type: string
+      brand_id:
+        type: integer
+      category_id:
+        type: integer
+      description:
+        type: string
+      is_new:
+        type: integer
+      price:
+        type: integer
+      product_color:
+        items:
+          $ref: '#/definitions/dto.ProductColorDTO'
+        type: array
+      product_image:
+        items:
+          $ref: '#/definitions/dto.ProductImageDTO'
+        type: array
+      product_size:
+        items:
+          $ref: '#/definitions/dto.ProductSizeDTO'
+        type: array
+      rating:
+        type: integer
+      stock:
+        type: integer
+      store_id:
+        type: integer
+    required:
+    - Product_name
+    - brand_id
+    - category_id
+    - description
+    - is_new
+    - price
+    - stock
+    - store_id
+    type: object
+  dto.ProductImageDTO:
+    properties:
+      photo:
+        type: string
+    type: object
+  dto.ProductSizeDTO:
+    properties:
+      size:
+        type: string
+    type: object
+  dto.ProductUpdateDTO:
+    properties:
+      Product_name:
+        type: string
+      brand_id:
+        type: integer
+      category_id:
+        type: integer
+      description:
+        type: string
+      id:
+        type: integer
+      is_new:
+        type: integer
+      price:
+        type: integer
+      product_color:
+        items:
+          $ref: '#/definitions/dto.ProductColorDTO'
+        type: array
+      product_image:
+        items:
+          $ref: '#/definitions/dto.ProductImageDTO'
+        type: array
+      product_size:
+        items:
+          $ref: '#/definitions/dto.ProductSizeDTO'
+        type: array
+      rating:
+        type: integer
+      stock:
+        type: integer
+      store_id:
+        type: integer
+    required:
+    - Product_name
+    - brand_id
+    - category_id
+    - description
+    - is_new
+    - price
+    - stock
+    - store_id
+    type: object
+  dto.ProfileChangePasswordDTO:
+    properties:
+      confirm_password:
+        type: string
+      password:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  dto.ProfileUpdateDTO:
+    properties:
+      email:
+        type: string
+      gender:
+        type: string
+      name:
+        type: string
+      phone:
+        type: string
+      photo:
+        type: string
+      user_id:
+        type: integer
+    required:
+    - name
+    type: object
+  dto.RegisterBuyerDTO:
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - name
+    - password
+    type: object
+  dto.RegisterSellerDTO:
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+      store_name:
+        type: string
+      store_phone:
+        type: string
+    required:
+    - email
+    - name
+    - password
+    - store_name
+    - store_phone
+    type: object
+  dto.StoreChangePasswordDTO:
+    properties:
+      confirm_password:
+        type: string
+      password:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  dto.StoreUpdateDTO:
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      photo:
+        type: string
+      store_description:
+        type: string
+      store_name:
+        type: string
+      store_phone:
+        type: string
+      user_id:
+        type: integer
+    required:
+    - name
+    type: object
+  helper.Response:
+    properties:
+      data: {}
+      errors: {}
+      message:
+        type: string
+      status:
+        type: boolean
+    type: object
 info:
   contact: {}
 paths:
+  /brand:
+    get:
+      consumes:
+      - application/json
+      description: Get list brands
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+      summary: List brands
+      tags:
+      - Brand
+    post:
+      consumes:
+      - application/json
+      description: Post brand
+      parameters:
+      - description: the body to create brand
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.BrandCreateDTO'
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - BearerToken: []
+      summary: Store brand
+      tags:
+      - Brand
+  /brand/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete brand
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - BearerToken: []
+      summary: Delete brand
+      tags:
+      - Brand
+    put:
+      consumes:
+      - application/json
+      description: Update brand
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: the body to update brand
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.BrandUpdateDTO'
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - BearerToken: []
+      summary: Update brand
+      tags:
+      - Brand
+  /cart:
+    get:
+      consumes:
+      - application/json
+      description: Get list carts
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+      summary: List carts
+      tags:
+      - Cart
+    post:
+      consumes:
+      - application/json
+      description: Post cart
+      parameters:
+      - description: the body to create cart
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CartCreateDTO'
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - BearerToken: []
+      summary: Store cart
+      tags:
+      - Cart
+  /cart/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete cart
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - BearerToken: []
+      summary: Delete cart
+      tags:
+      - Cart
+    get:
+      consumes:
+      - application/json
+      description: Get detail cart
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+      summary: Detail cart
+      tags:
+      - Cart
+    put:
+      consumes:
+      - application/json
+      description: Update cart
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: the body to update cart
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CartUpdateDTO'
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - BearerToken: []
+      summary: Update cart
+      tags:
+      - Cart
+  /category:
+    get:
+      consumes:
+      - application/json
+      description: Get list categories
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+      summary: List categories
+      tags:
+      - Category
+    post:
+      consumes:
+      - application/json
+      description: Post category
+      parameters:
+      - description: the body to create category
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CategoryCreateDTO'
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - BearerToken: []
+      summary: Store category
+      tags:
+      - Category
+  /category/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete category
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - BearerToken: []
+      summary: Delete category
+      tags:
+      - Category
+    put:
+      consumes:
+      - application/json
+      description: Update category
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: the body to update category
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CategoryUpdateDTO'
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - BearerToken: []
+      summary: Update category
+      tags:
+      - Category
+  /login:
+    post:
+      consumes:
+      - application/json
+      description: Logging in to get jwt to access admin, seller or buyer api by roles
+      parameters:
+      - description: the body to login a user
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.LoginDTO'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.Response'
+      summary: Login
+      tags:
+      - Auth
   /product:
     get:
       consumes:
       - application/json
-      description: get products
+      description: Get list products
       produces:
       - application/json
-      responses: {}
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
       summary: List products
       tags:
+      - Brand
+    post:
+      consumes:
+      - application/json
+      description: Post product
+      parameters:
+      - description: the body to create product
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ProductCreateDTO'
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - BearerToken: []
+      summary: Store product
+      tags:
       - Product
+  /product/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete product
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - BearerToken: []
+      summary: Delete product
+      tags:
+      - Product
+    get:
+      consumes:
+      - application/json
+      description: Get detail product
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+      summary: Detail product
+      tags:
+      - Product
+    put:
+      consumes:
+      - application/json
+      description: Update product
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: the body to update product
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ProductUpdateDTO'
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - BearerToken: []
+      summary: Update product
+      tags:
+      - Product
+  /profile:
+    get:
+      consumes:
+      - application/json
+      description: Get list profiles
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+      summary: List profiles
+      tags:
+      - Profile
+  /profile/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get detail profile
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+      summary: Detail profile
+      tags:
+      - Profile
+    put:
+      consumes:
+      - application/json
+      description: Update profile
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: the body to update profile
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ProfileUpdateDTO'
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - BearerToken: []
+      summary: Update profile
+      tags:
+      - Profile
+  /profile/change-password:
+    put:
+      consumes:
+      - application/json
+      description: Change password profile
+      parameters:
+      - description: the body to change password
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ProfileChangePasswordDTO'
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - BearerToken: []
+      summary: Change password profile
+      tags:
+      - Profile
+  /register-buyer:
+    post:
+      consumes:
+      - application/json
+      description: Registering a buyer
+      parameters:
+      - description: the body to register a buyer
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.RegisterBuyerDTO'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+      summary: Register buyer
+      tags:
+      - Auth
+  /register-seller:
+    post:
+      consumes:
+      - application/json
+      description: Registering a seller
+      parameters:
+      - description: the body to register a seller
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.RegisterSellerDTO'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+      summary: Register seller
+      tags:
+      - Auth
+  /store:
+    get:
+      consumes:
+      - application/json
+      description: Get list stores
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+      summary: List stores
+      tags:
+      - Store
+  /store/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get detail store
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+      summary: Detail store
+      tags:
+      - Store
+    put:
+      consumes:
+      - application/json
+      description: Update store
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: the body to update store
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.StoreUpdateDTO'
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - BearerToken: []
+      summary: Update store
+      tags:
+      - Store
+  /store/change-password:
+    put:
+      consumes:
+      - application/json
+      description: Change password store
+      parameters:
+      - description: the body to change password
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.StoreChangePasswordDTO'
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - BearerToken: []
+      summary: Change password store
+      tags:
+      - Store
 swagger: "2.0"

@@ -8,7 +8,7 @@ type BrandCreateDTO struct {
 
 // BrandUpdateDTO is a model that user use  when updating a category
 type BrandUpdateDTO struct {
-	ID        uint64 `json:"id" form:"id" binding:"required"`
+	ID        uint64 `json:"id" form:"id"`
 	BrandName string `json:"brand_name" form:"brand_name" binding:"required"`
 	Photo     string `json:"photo" form:"photo"`
 }

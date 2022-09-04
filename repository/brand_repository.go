@@ -8,10 +8,10 @@ import (
 
 type BrandRepository interface {
 	List() []entity.Brand
+	FindByPK(id uint64) entity.Brand
 	Store(b entity.Brand) entity.Brand
 	Update(b entity.Brand) entity.Brand
 	Delete(b entity.Brand)
-	FindByID(id uint64) entity.Brand
 }
 
 type iBrandRepository struct {
@@ -28,6 +28,12 @@ func (db *iBrandRepository) List() []entity.Brand {
 	return brands
 }
 
+func (db *iBrandRepository) FindByPK(id uint64) entity.Brand {
+	var brand entity.Brand
+	db.connection.Preload("Brands").Find(&brand, id)
+	return brand
+}
+
 func (db *iBrandRepository) Store(b entity.Brand) entity.Brand {
 	db.connection.Save(&b)
 	db.connection.Preload("Brands").Find(&b)
@@ -42,10 +48,4 @@ func (db *iBrandRepository) Update(b entity.Brand) entity.Brand {
 
 func (db *iBrandRepository) Delete(b entity.Brand) {
 	db.connection.Delete(&b)
-}
-
-func (db *iBrandRepository) FindByID(id uint64) entity.Brand {
-	var brand entity.Brand
-	db.connection.Preload("Brands").Find(&brand, id)
-	return brand
 }

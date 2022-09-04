@@ -12,10 +12,10 @@ import (
 
 type BrandService interface {
 	List() []entity.Brand
+	FindByPK(id uint64) entity.Brand
 	Store(b dto.BrandCreateDTO) entity.Brand
 	Update(b dto.BrandUpdateDTO) entity.Brand
 	Delete(b entity.Brand)
-	FindByID(id uint64) entity.Brand
 }
 
 type iBrandService struct {
@@ -28,6 +28,10 @@ func NewBrandService(r repository.BrandRepository) BrandService {
 
 func (s *iBrandService) List() []entity.Brand {
 	return s.repository.List()
+}
+
+func (s *iBrandService) FindByPK(id uint64) entity.Brand {
+	return s.repository.FindByPK(id)
 }
 
 func (s *iBrandService) Store(b dto.BrandCreateDTO) entity.Brand {
@@ -52,8 +56,4 @@ func (s *iBrandService) Update(b dto.BrandUpdateDTO) entity.Brand {
 
 func (s *iBrandService) Delete(b entity.Brand) {
 	s.repository.Delete(b)
-}
-
-func (s *iBrandService) FindByID(id uint64) entity.Brand {
-	return s.repository.FindByID(id)
 }

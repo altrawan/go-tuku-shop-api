@@ -29,6 +29,16 @@ func NewAuthController(s service.AuthService) AuthController {
 	return &iAuthController{s}
 }
 
+// Login godoc
+// @Summary Login
+// @Description Logging in to get jwt to access admin, seller or buyer api by roles
+// @Tags Auth
+// @Param Body body dto.LoginDTO true "the body to login a user"
+// @Accept json
+// @Produce json
+// @Success 200 {object} helper.Response
+// @Failure 400,403 {object} helper.Response
+// @Router /login [post]
 func (c *iAuthController) Login(ctx *gin.Context) {
 	var loginDTO dto.LoginDTO
 
@@ -61,6 +71,16 @@ func (c *iAuthController) Login(ctx *gin.Context) {
 	ctx.AbortWithStatusJSON(http.StatusUnauthorized, res)
 }
 
+// RegisterSeller godoc
+// @Summary Register seller
+// @Description Registering a seller
+// @Tags Auth
+// @Param Body body dto.RegisterSellerDTO true "the body to register a seller"
+// @Accept json
+// @Produce json
+// @Success 200 {object} helper.Response
+// @Failure 400 {object} helper.Response
+// @Router /register-seller [post]
 func (c *iAuthController) RegisterSeller(ctx *gin.Context) {
 	var registerSellerDTO dto.RegisterSellerDTO
 
@@ -81,6 +101,16 @@ func (c *iAuthController) RegisterSeller(ctx *gin.Context) {
 	}
 }
 
+// RegisterBuyer godoc
+// @Summary Register buyer
+// @Description Registering a buyer
+// @Tags Auth
+// @Param Body body dto.RegisterBuyerDTO true "the body to register a buyer"
+// @Accept json
+// @Produce json
+// @Success 200 {object} helper.Response
+// @Failure 400 {object} helper.Response
+// @Router /register-buyer [post]
 func (c *iAuthController) RegisterBuyer(ctx *gin.Context) {
 	var registerBuyerDTO dto.RegisterBuyerDTO
 

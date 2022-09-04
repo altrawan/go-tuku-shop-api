@@ -12,10 +12,10 @@ import (
 
 type CategoryService interface {
 	List() []entity.Category
+	FindByPK(id uint64) entity.Category
 	Store(b dto.CategoryCreateDTO) entity.Category
 	Update(b dto.CategoryUpdateDTO) entity.Category
 	Delete(b entity.Category)
-	FindByID(id uint64) entity.Category
 }
 
 type iCategoryService struct {
@@ -28,6 +28,10 @@ func NewCategoryService(r repository.CategoryRepository) CategoryService {
 
 func (s *iCategoryService) List() []entity.Category {
 	return s.repository.List()
+}
+
+func (s *iCategoryService) FindByPK(id uint64) entity.Category {
+	return s.repository.FindByPK(id)
 }
 
 func (s *iCategoryService) Store(b dto.CategoryCreateDTO) entity.Category {
@@ -52,8 +56,4 @@ func (s *iCategoryService) Update(b dto.CategoryUpdateDTO) entity.Category {
 
 func (s *iCategoryService) Delete(b entity.Category) {
 	s.repository.Delete(b)
-}
-
-func (s *iCategoryService) FindByID(id uint64) entity.Category {
-	return s.repository.FindByID(id)
 }

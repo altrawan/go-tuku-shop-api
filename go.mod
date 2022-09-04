@@ -1,5 +1,6 @@
 module gitlab.com/altrawan/final-project-bds-sanbercode-golang-batch-37
 
+// +heroku goVersion go1.18
 go 1.18
 
 require (

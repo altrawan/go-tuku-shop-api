@@ -12,7 +12,8 @@ import (
 
 type ProfileService interface {
 	List() []entity.Profile
-	FindByID(profileID uint64) entity.Profile
+	FindByPK(profileID uint64) entity.Profile
+	FindByUserID(profileID uint64) entity.Profile
 	Update(p dto.ProfileUpdateDTO) interface{}
 	ChangePassword(p dto.ProfileChangePasswordDTO) interface{}
 	IsAllowedToEdit(userID uint64, profileID uint64) bool
@@ -30,8 +31,12 @@ func (s *iProfileService) List() []entity.Profile {
 	return s.repository.List()
 }
 
-func (s *iProfileService) FindByID(profileID uint64) entity.Profile {
-	return s.repository.FindByID(profileID)
+func (s *iProfileService) FindByPK(profileID uint64) entity.Profile {
+	return s.repository.FindByPK(profileID)
+}
+
+func (s *iProfileService) FindByUserID(userID uint64) entity.Profile {
+	return s.repository.FindByUserID(userID)
 }
 
 func (s *iProfileService) Update(p dto.ProfileUpdateDTO) interface{} {
@@ -50,8 +55,10 @@ func (s *iProfileService) Update(p dto.ProfileUpdateDTO) interface{} {
 	user, profile := s.repository.Update(entityUser, entityProfile)
 
 	res := map[string]string{
-		"name":  profile.Name,
-		"email": user.Email,
+		"name":   profile.Name,
+		"email":  user.Email,
+		"phone":  profile.Phone,
+		"gender": profile.Gender,
 	}
 
 	return res
@@ -59,16 +66,27 @@ func (s *iProfileService) Update(p dto.ProfileUpdateDTO) interface{} {
 
 func (s *iProfileService) ChangePassword(p dto.ProfileChangePasswordDTO) interface{} {
 	entityUser := entity.User{}
-	entityUser.Password = p.NewPassword
 	errUser := smapping.FillStruct(&entityUser, smapping.MapFields(&p))
 	if errUser != nil {
 		log.Fatalf("Failed map %v", errUser)
 	}
-	res := s.repository.ChangePassword(entityUser)
+
+	entityProfile := entity.Profile{}
+	err := smapping.FillStruct(&entityProfile, smapping.MapFields(&p))
+	if err != nil {
+		log.Fatalf("Failed map %v: ", err)
+	}
+
+	user, _ := s.repository.ChangePassword(entityUser, entityProfile)
+
+	res := map[string]string{
+		"password": user.Password,
+	}
+
 	return res
 }
 
 func (s *iProfileService) IsAllowedToEdit(userID uint64, profileID uint64) bool {
-	p := s.repository.FindByID(profileID)
+	p := s.repository.FindByUserID(profileID)
 	return userID == p.UserID
 }

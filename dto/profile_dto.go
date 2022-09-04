@@ -12,7 +12,7 @@ type ProfileUpdateDTO struct {
 
 // ProfileChangePasswordDTO is used by user when PUT change password
 type ProfileChangePasswordDTO struct {
-	OldPassword     string `json:"old_password" form:"old_password"`
-	NewPassword     string `json:"new_password" form:"new_password"`
+	UserID          uint64 `json:"user_id" form:"user_id"`
+	Password        string `json:"password" form:"password"`
 	ConfirmPassword string `json:"confirm_password" form:"confirm_password"`
 }

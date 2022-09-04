@@ -11,9 +11,10 @@ import (
 
 type ProfileRepository interface {
 	List() []entity.Profile
-	FindByID(profileID uint64) entity.Profile
+	FindByPK(profileID uint64) entity.Profile
+	FindByUserID(UserID uint64) entity.Profile
 	Update(u entity.User, p entity.Profile) (entity.User, entity.Profile)
-	ChangePassword(u entity.User) entity.User
+	ChangePassword(u entity.User, p entity.Profile) (entity.User, entity.Profile)
 }
 
 type iProfileRepository struct {
@@ -30,9 +31,15 @@ func (db *iProfileRepository) List() []entity.Profile {
 	return profiles
 }
 
-func (db *iProfileRepository) FindByID(profileID uint64) entity.Profile {
+func (db *iProfileRepository) FindByPK(profileID uint64) entity.Profile {
 	var profile entity.Profile
 	db.connection.Preload("Profiles").Find(&profile, profileID)
+	return profile
+}
+
+func (db *iProfileRepository) FindByUserID(UserID uint64) entity.Profile {
+	var profile entity.Profile
+	db.connection.Where("user_id = ?", UserID).First(&profile)
 	return profile
 }
 
@@ -52,9 +59,9 @@ func (db *iProfileRepository) Update(u entity.User, p entity.Profile) (entity.Us
 	return u, p
 }
 
-func (db *iProfileRepository) ChangePassword(u entity.User) entity.User {
+func (db *iProfileRepository) ChangePassword(u entity.User, p entity.Profile) (entity.User, entity.Profile) {
 	var user entity.User
 	user.Password = helper.HashAndSalt([]byte(u.Password))
-	db.connection.Where("id = ?", u.ID).Model(&u).Updates(user)
-	return u
+	db.connection.Where("id = ?", p.UserID).Model(&u).Updates(user)
+	return u, p
 }

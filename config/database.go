@@ -14,9 +14,11 @@ import (
 
 // NewClient is creating a new connection to our database
 func NewClient() *gorm.DB {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatalf("Error loading .env file")
+	if os.Getenv("ENVIRONMENT") == "development" {
+		err := godotenv.Load()
+		if err != nil {
+			log.Fatalf("Error loading .env file")
+		}
 	}
 
 	dbUser := os.Getenv("DB_USERNAME")

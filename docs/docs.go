@@ -29,60 +29,7 @@ const docTemplate = `{
                     "Product"
                 ],
                 "summary": "List products",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/entity.Product"
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    },
-    "definitions": {
-        "entity.Product": {
-            "type": "object",
-            "properties": {
-                "brand_id": {
-                    "type": "integer"
-                },
-                "category_id": {
-                    "type": "integer"
-                },
-                "createdAt": {
-                    "type": "string"
-                },
-                "description": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "is_new": {
-                    "type": "integer"
-                },
-                "price": {
-                    "type": "integer"
-                },
-                "product_name": {
-                    "type": "string"
-                },
-                "rating": {
-                    "type": "integer"
-                },
-                "stock": {
-                    "type": "integer"
-                },
-                "store_id": {
-                    "type": "integer"
-                },
-                "updatedAt": {
-                    "type": "string"
-                }
+                "responses": {}
             }
         }
     }

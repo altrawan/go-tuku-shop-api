@@ -1,6 +1,8 @@
 package router
 
 import (
+	"os"
+
 	"github.com/gin-gonic/gin"
 	"gitlab.com/altrawan/final-project-bds-sanbercode-golang-batch-37/controller"
 	"gitlab.com/altrawan/final-project-bds-sanbercode-golang-batch-37/docs"
@@ -26,7 +28,7 @@ func NewRouter(db *gorm.DB) *gin.Engine {
 	docs.SwaggerInfo.Title = "Tuku Shop API"
 	docs.SwaggerInfo.Description = "RESTful API for E-commerce platforms"
 	docs.SwaggerInfo.Version = "1.0"
-	docs.SwaggerInfo.Host = "localhost:8080"
+	docs.SwaggerInfo.Host = os.Getenv("SWAGGER_HOST")
 	docs.SwaggerInfo.BasePath = "/api/v1"
 	docs.SwaggerInfo.Schemes = []string{"http", "https"}
 

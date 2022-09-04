@@ -49,7 +49,7 @@ func NewRouter(db *gorm.DB) *gin.Engine {
 	// addressRepository := repository.NewAddressRepository(db)
 	authRepository := repository.NewAuthRepository(db)
 	brandRepository := repository.NewBrandRepository(db)
-	// cartRepository := repository.NewCartRepository(db)
+	cartRepository := repository.NewCartRepository(db)
 	categoryRepository := repository.NewCategoryRepository(db)
 	productRepository := repository.NewProductRepository(db)
 	profileRepository := repository.NewProfileRepository(db)
@@ -58,7 +58,7 @@ func NewRouter(db *gorm.DB) *gin.Engine {
 	// addressService := service.NewAddressService(addressRepository)
 	authService := service.NewAuthService(authRepository)
 	brandService := service.NewBrandService(brandRepository)
-	// cartService := service.NewCartService(cartRepository)
+	cartService := service.NewCartService(cartRepository)
 	categoryService := service.NewCategoryService(categoryRepository)
 	productService := service.NewProductService(productRepository)
 	profileService := service.NewProfileService(profileRepository)
@@ -67,7 +67,7 @@ func NewRouter(db *gorm.DB) *gin.Engine {
 	// addressController := controller.NewAddressController(addressService)
 	authController := controller.NewAuthController(authService)
 	brandController := controller.NewBrandController(brandService)
-	// cartController := controller.NewCartController(cartService)
+	cartController := controller.NewCartController(cartService)
 	categoryController := controller.NewCategoryController(categoryService)
 	productController := controller.NewProductController(productService)
 	profileController := controller.NewProfileController(profileService)
@@ -110,14 +110,14 @@ func NewRouter(db *gorm.DB) *gin.Engine {
 		brandRoutes.Use(middleware.JwtAuth()).DELETE("/:id", brandController.Delete)
 	}
 
-	// cartRoutes := v1.Group("/cart")
-	// {
-	// 	cartRoutes.GET("/address", cartController.List)
-	// 	cartRoutes.GET("/address/:id", cartController.Detail)
-	// 	cartRoutes.POST("/address", cartController.Store)
-	// 	cartRoutes.PUT("/address/:id", cartController.Update)
-	// 	cartRoutes.DELETE("/address/:id", cartController.Delete)
-	// }
+	cartRoutes := v1.Group("/cart")
+	{
+		cartRoutes.GET("/cart", cartController.List)
+		cartRoutes.GET("/cart/:id", cartController.Detail)
+		cartRoutes.Use(middleware.JwtAuth()).POST("/cart", cartController.Store)
+		cartRoutes.Use(middleware.JwtAuth()).PUT("/cart/:id", cartController.Update)
+		cartRoutes.Use(middleware.JwtAuth()).DELETE("/cart/:id", cartController.Delete)
+	}
 
 	categoryRoutes := v1.Group("/category")
 	{
@@ -130,10 +130,10 @@ func NewRouter(db *gorm.DB) *gin.Engine {
 	productRoutes := v1.Group("/product")
 	{
 		productRoutes.GET("/", productController.List)
-		// productRoutes.GET("/:id", productController.Detail)
-		// productRoutes.Use(middleware.JwtAuth()).POST("/", productController.Store)
-		// productRoutes.Use(middleware.JwtAuth()).PUT("/:id", productController.Update)
-		// productRoutes.Use(middleware.JwtAuth()).DELETE("/:id", productController.Delete)
+		productRoutes.GET("/:id", productController.Detail)
+		productRoutes.Use(middleware.JwtAuth()).POST("/", productController.Store)
+		productRoutes.Use(middleware.JwtAuth()).PUT("/:id", productController.Update)
+		productRoutes.Use(middleware.JwtAuth()).DELETE("/:id", productController.Delete)
 	}
 
 	profileRoutes := v1.Group("/profile")
@@ -146,10 +146,10 @@ func NewRouter(db *gorm.DB) *gin.Engine {
 
 	storeRoutes := v1.Group("/store")
 	{
-		// storeRoutes.GET("/", storeController.List)
-		// storeRoutes.GET("/:id", storeController.Detail)
-		storeRoutes.PUT("/:id", storeController.Update)
-		// storeRoutes.DELETE("/change-password", storeController.ChangePassword)
+		storeRoutes.GET("/", storeController.List)
+		storeRoutes.GET("/:id", storeController.Detail)
+		storeRoutes.Use(middleware.JwtAuth()).PUT("/:id", storeController.Update)
+		storeRoutes.Use(middleware.JwtAuth()).PUT("/change-password", storeController.ChangePassword)
 	}
 
 	r.Run(":" + port)

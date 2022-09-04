@@ -1,0 +1,49 @@
+definitions:
+  entity.Product:
+    properties:
+      brand_id:
+        type: integer
+      category_id:
+        type: integer
+      createdAt:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      is_new:
+        type: integer
+      price:
+        type: integer
+      product_name:
+        type: string
+      rating:
+        type: integer
+      stock:
+        type: integer
+      store_id:
+        type: integer
+      updatedAt:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /product:
+    get:
+      consumes:
+      - application/json
+      description: get products
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.Product'
+            type: array
+      summary: List products
+      tags:
+      - Product
+swagger: "2.0"

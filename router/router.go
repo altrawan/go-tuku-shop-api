@@ -32,6 +32,12 @@ func NewRouter(db *gorm.DB) *gin.Engine {
 	docs.SwaggerInfo.BasePath = "/api/v1"
 	docs.SwaggerInfo.Schemes = []string{"http", "https"}
 
+	port := os.Getenv("PORT")
+
+	if port == "" {
+		port = "3000"
+	}
+
 	r := gin.Default()
 
 	// set db to gin context
@@ -144,6 +150,8 @@ func NewRouter(db *gorm.DB) *gin.Engine {
 		storeRoutes.PUT("/:id", storeController.Update)
 		// storeRoutes.DELETE("/change-password", storeController.ChangePassword)
 	}
+
+	r.Run(":" + port)
 
 	return r
 }

@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
+	"gitlab.com/altrawan/final-project-bds-sanbercode-golang-batch-37/migration"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -17,7 +18,7 @@ func NewClient() *gorm.DB {
 		log.Fatalf("Error loading .env file")
 	}
 
-	dbUser := os.Getenv("DB_USER")
+	dbUser := os.Getenv("DB_USERNAME")
 	dbPass := os.Getenv("DB_PASSWORD")
 	dbHost := os.Getenv("DB_HOST")
 	dbPort := os.Getenv("DB_PORT")
@@ -29,6 +30,8 @@ func NewClient() *gorm.DB {
 	if err != nil {
 		panic("Failed to create a connection to database")
 	}
+
+	migration.Migrate(db)
 
 	return db
 }

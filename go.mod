@@ -13,6 +13,7 @@ require (
 	github.com/swaggo/swag v1.8.5
 	golang.org/x/crypto v0.0.0-20220829220503-c86fa9a7ed90
 	gorm.io/driver/mysql v1.3.6
+	gorm.io/driver/postgres v1.3.9
 	gorm.io/gorm v1.23.8
 )
 
@@ -54,5 +55,4 @@ require (
 	google.golang.org/protobuf v1.28.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	gorm.io/driver/postgres v1.3.9 // indirect
 )

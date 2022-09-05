@@ -141,16 +141,16 @@ func NewRouter(db *gorm.DB) *gin.Engine {
 
 	profileRoutes := v1.Group("/profile")
 	{
-		profileRoutes.GET("/", profileController.List)
-		profileRoutes.GET("/:id", profileController.Detail)
+		profileRoutes.Use(middleware.JwtAuth()).GET("/", profileController.List)
+		profileRoutes.Use(middleware.JwtAuth()).GET("/:id", profileController.Detail)
 		profileRoutes.Use(middleware.JwtAuth()).PUT("/:id", profileController.Update)
 		profileRoutes.Use(middleware.JwtAuth()).PUT("/change-password", profileController.ChangePassword)
 	}
 
 	storeRoutes := v1.Group("/store")
 	{
-		storeRoutes.GET("/", storeController.List)
-		storeRoutes.GET("/:id", storeController.Detail)
+		storeRoutes.Use(middleware.JwtAuth()).GET("/", storeController.List)
+		storeRoutes.Use(middleware.JwtAuth()).GET("/:id", storeController.Detail)
 		storeRoutes.Use(middleware.JwtAuth()).PUT("/:id", storeController.Update)
 		storeRoutes.Use(middleware.JwtAuth()).PUT("/change-password", storeController.ChangePassword)
 	}

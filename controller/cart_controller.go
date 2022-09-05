@@ -81,7 +81,7 @@ func (c *iCartController) Detail(ctx *gin.Context) {
 // @Accept json
 // @Produce json
 // @Success 201 {object} helper.Response
-// @Failure 400 {object} helper.Response
+// @Failure 400,500 {object} helper.Response
 // @Router /cart [post]
 func (c *iCartController) Store(ctx *gin.Context) {
 	var CartCreateDTO dto.CartCreateDTO
@@ -115,7 +115,7 @@ func (c *iCartController) Store(ctx *gin.Context) {
 // @Accept json
 // @Produce json
 // @Success 200 {object} helper.Response
-// @Failure 400,404 {object} helper.Response
+// @Failure 400,404,500 {object} helper.Response
 // @Router /cart/{id} [put]
 func (c *iCartController) Update(ctx *gin.Context) {
 	var CartUpdateDTO dto.CartUpdateDTO

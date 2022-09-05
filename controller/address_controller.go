@@ -81,7 +81,7 @@ func (c *iAddressController) Detail(ctx *gin.Context) {
 // @Accept json
 // @Produce json
 // @Success 201 {object} helper.Response
-// @Failure 400 {object} helper.Response
+// @Failure 400,500 {object} helper.Response
 // @Router /Address [post]
 func (c *iAddressController) Store(ctx *gin.Context) {
 	var AddressCreateDTO dto.AddressCreateDTO
@@ -115,7 +115,7 @@ func (c *iAddressController) Store(ctx *gin.Context) {
 // @Accept json
 // @Produce json
 // @Success 200 {object} helper.Response
-// @Failure 400,404 {object} helper.Response
+// @Failure 400,404,500 {object} helper.Response
 // @Router /Address/{id} [put]
 func (c *iAddressController) Update(ctx *gin.Context) {
 	var AddressUpdateDTO dto.AddressUpdateDTO
@@ -171,7 +171,7 @@ func (c *iAddressController) Update(ctx *gin.Context) {
 // @Accept json
 // @Produce json
 // @Success 200 {object} helper.Response
-// @Failure 400 {object} helper.Response
+// @Failure 400,500 {object} helper.Response
 // @Router /Address/{id} [delete]
 func (c *iAddressController) Delete(ctx *gin.Context) {
 	var Address entity.Address

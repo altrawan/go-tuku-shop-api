@@ -1,4 +1,60 @@
 definitions:
+  dto.AddressCreateDTO:
+    properties:
+      address:
+        type: string
+      city:
+        type: string
+      is_primary:
+        type: integer
+      label:
+        type: string
+      postal_code:
+        type: integer
+      recipient_name:
+        type: string
+      recipient_phone:
+        type: string
+      user_id:
+        type: integer
+    required:
+    - address
+    - city
+    - is_primary
+    - label
+    - postal_code
+    - recipient_name
+    - recipient_phone
+    type: object
+  dto.AddressUpdateDTO:
+    properties:
+      address:
+        type: string
+      city:
+        type: string
+      id:
+        type: integer
+      is_primary:
+        type: integer
+      label:
+        type: string
+      postal_code:
+        type: integer
+      recipient_name:
+        type: string
+      recipient_phone:
+        type: string
+      user_id:
+        type: integer
+    required:
+    - address
+    - city
+    - is_primary
+    - label
+    - postal_code
+    - recipient_name
+    - recipient_phone
+    type: object
   dto.BrandCreateDTO:
     properties:
       brand_name:
@@ -22,9 +78,11 @@ definitions:
   dto.CartCreateDTO:
     properties:
       product_id:
-        type: string
+        type: integer
       qty:
-        type: string
+        type: integer
+      user_id:
+        type: integer
     required:
     - product_id
     - qty
@@ -34,9 +92,11 @@ definitions:
       id:
         type: integer
       product_id:
-        type: string
+        type: integer
       qty:
-        type: string
+        type: integer
+      user_id:
+        type: integer
     required:
     - product_id
     - qty
@@ -260,6 +320,54 @@ definitions:
     required:
     - name
     type: object
+  dto.TransactionCreateDTO:
+    properties:
+      invoice:
+        type: string
+      price:
+        type: integer
+      product_id:
+        type: integer
+      qty:
+        type: integer
+      status:
+        type: string
+      total:
+        type: integer
+      transaction_id:
+        type: integer
+      user_id:
+        type: integer
+    type: object
+  dto.TransactionUpdateAddressDTO:
+    properties:
+      address:
+        type: string
+      city:
+        type: string
+      id:
+        type: integer
+      postal_code:
+        type: integer
+      recipient_name:
+        type: string
+      recipient_phone:
+        type: string
+    required:
+    - address
+    - city
+    - recipient_name
+    - recipient_phone
+    type: object
+  dto.TransactionUpdatePaymentDTO:
+    properties:
+      id:
+        type: integer
+      payment_method:
+        type: string
+    required:
+    - payment_method
+    type: object
   helper.Response:
     properties:
       data: {}
@@ -272,6 +380,154 @@ definitions:
 info:
   contact: {}
 paths:
+  /Address:
+    get:
+      consumes:
+      - application/json
+      description: Get list Addresss
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+      summary: List Addresss
+      tags:
+      - Address
+    post:
+      consumes:
+      - application/json
+      description: Post Address
+      parameters:
+      - description: the body to create Address
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.AddressCreateDTO'
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - BearerToken: []
+      summary: Store Address
+      tags:
+      - Address
+  /Address/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Address
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - BearerToken: []
+      summary: Delete Address
+      tags:
+      - Address
+    get:
+      consumes:
+      - application/json
+      description: Get detail Address
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+      summary: Detail Address
+      tags:
+      - Address
+    put:
+      consumes:
+      - application/json
+      description: Update Address
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: the body to update Address
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.AddressUpdateDTO'
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - BearerToken: []
+      summary: Update Address
+      tags:
+      - Address
   /brand:
     get:
       consumes:
@@ -464,6 +720,10 @@ paths:
             $ref: '#/definitions/helper.Response'
         "400":
           description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
           schema:
             $ref: '#/definitions/helper.Response'
       security:
@@ -704,7 +964,7 @@ paths:
             $ref: '#/definitions/helper.Response'
       summary: List products
       tags:
-      - Brand
+      - Product
     post:
       consumes:
       - application/json
@@ -1146,4 +1406,195 @@ paths:
       summary: Change password store
       tags:
       - Store
+  /transaction:
+    get:
+      consumes:
+      - application/json
+      description: Get list Transactions
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+      summary: List Transactions
+      tags:
+      - Transaction
+    post:
+      consumes:
+      - application/json
+      description: Post Transaction
+      parameters:
+      - description: the body to create Transaction
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.TransactionCreateDTO'
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - BearerToken: []
+      summary: Store Transaction
+      tags:
+      - Transaction
+  /transaction/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Transaction
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - BearerToken: []
+      summary: Delete Transaction
+      tags:
+      - Transaction
+    get:
+      consumes:
+      - application/json
+      description: Get detail Transaction
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+      summary: Detail Transaction
+      tags:
+      - Transaction
+  /transaction/{id}/address:
+    put:
+      consumes:
+      - application/json
+      description: Update Transaction
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: the body to update Address Transaction
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.TransactionUpdateAddressDTO'
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - BearerToken: []
+      summary: Update Transaction
+      tags:
+      - Transaction
+  /transaction/{id}/payment:
+    put:
+      consumes:
+      - application/json
+      description: Update Transaction
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: the body to update Payment Transaction
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.TransactionUpdatePaymentDTO'
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - BearerToken: []
+      summary: Update Transaction
+      tags:
+      - Transaction
 swagger: "2.0"

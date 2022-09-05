@@ -31,7 +31,7 @@ func NewProductController(s service.ProductService) ProductController {
 // List godoc
 // @Summary List products
 // @Description Get list products
-// @Tags Brand
+// @Tags Product
 // @Accept json
 // @Produce json
 // @Success 200 {object} helper.Response

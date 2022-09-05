@@ -61,7 +61,7 @@ func (c *iBrandController) Store(ctx *gin.Context) {
 		ctx.JSON(http.StatusBadRequest, res)
 	} else {
 		data := c.service.Store(brandCreateDTO)
-		res := helper.BuildSuccessResponse("Success store category", data)
+		res := helper.BuildSuccessResponse("Success store brand", data)
 		ctx.JSON(http.StatusCreated, res)
 	}
 }
@@ -104,7 +104,7 @@ func (c *iBrandController) Update(ctx *gin.Context) {
 
 	brandUpdateDTO.ID = brand.ID
 	data := c.service.Update(brandUpdateDTO)
-	res := helper.BuildSuccessResponse("Success update category", data)
+	res := helper.BuildSuccessResponse("Success update brand", data)
 	ctx.JSON(http.StatusOK, res)
 }
 
@@ -131,6 +131,6 @@ func (c *iBrandController) Delete(ctx *gin.Context) {
 
 	brand.ID = id
 	c.service.Delete(brand)
-	res := helper.BuildSuccessResponse("Success delete category", helper.EmptyObj{})
+	res := helper.BuildSuccessResponse("Success delete brand", helper.EmptyObj{})
 	ctx.JSON(http.StatusOK, res)
 }

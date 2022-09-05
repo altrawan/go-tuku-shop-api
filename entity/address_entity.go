@@ -13,7 +13,7 @@ type Address struct {
 	City           string `gorm:"type:varchar(255) not null" json:"city"`
 	Address        string `gorm:"type:text not null" json:"address"`
 	PostalCode     uint64 `gorm:"type:integer not null" json:"postal_code"`
-	IsPrimary      uint64 `gorm:"type:enum('0','1') not null" json:"is_primary"`
+	IsPrimary      uint64 `gorm:"type:integer not null" json:"is_primary"`
 	gorm.Model
 	User User `gorm:"foreignkey:UserID;constraint:onUpdate:CASCADE,onDelete:CASCADE" json:"user"`
 }

@@ -38,7 +38,7 @@ func NewAuthController(s service.AuthService) AuthController {
 // @Produce json
 // @Success 200 {object} helper.Response
 // @Failure 400,403 {object} helper.Response
-// @Router /login [post]
+// @Router /auth/login [post]
 func (c *iAuthController) Login(ctx *gin.Context) {
 	var loginDTO dto.LoginDTO
 
@@ -80,7 +80,7 @@ func (c *iAuthController) Login(ctx *gin.Context) {
 // @Produce json
 // @Success 200 {object} helper.Response
 // @Failure 400 {object} helper.Response
-// @Router /register-seller [post]
+// @Router /auth/register-seller [post]
 func (c *iAuthController) RegisterSeller(ctx *gin.Context) {
 	var registerSellerDTO dto.RegisterSellerDTO
 
@@ -110,7 +110,7 @@ func (c *iAuthController) RegisterSeller(ctx *gin.Context) {
 // @Produce json
 // @Success 200 {object} helper.Response
 // @Failure 400 {object} helper.Response
-// @Router /register-buyer [post]
+// @Router /auth/register-buyer [post]
 func (c *iAuthController) RegisterBuyer(ctx *gin.Context) {
 	var registerBuyerDTO dto.RegisterBuyerDTO
 

@@ -18,6 +18,11 @@ const docTemplate = `{
     "paths": {
         "/Address": {
             "get": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
                 "description": "Get list Addresss",
                 "consumes": [
                     "application/json"
@@ -29,6 +34,24 @@ const docTemplate = `{
                     "Address"
                 ],
                 "summary": "List Addresss",
+                "parameters": [
+                    {
+                        "description": "the body to create Address",
+                        "name": "Body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.AddressCreateDTO"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -97,6 +120,11 @@ const docTemplate = `{
         },
         "/Address/{id}": {
             "get": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
                 "description": "Get detail Address",
                 "consumes": [
                     "application/json"
@@ -109,6 +137,22 @@ const docTemplate = `{
                 ],
                 "summary": "Detail Address",
                 "parameters": [
+                    {
+                        "description": "the body to create Address",
+                        "name": "Body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.AddressCreateDTO"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "string",
                         "description": "id",
@@ -450,6 +494,11 @@ const docTemplate = `{
         },
         "/cart": {
             "get": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
                 "description": "Get list carts",
                 "consumes": [
                     "application/json"
@@ -461,6 +510,24 @@ const docTemplate = `{
                     "Cart"
                 ],
                 "summary": "List carts",
+                "parameters": [
+                    {
+                        "description": "the body to create Address",
+                        "name": "Body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.AddressCreateDTO"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -529,6 +596,11 @@ const docTemplate = `{
         },
         "/cart/{id}": {
             "get": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
                 "description": "Get detail cart",
                 "consumes": [
                     "application/json"
@@ -541,6 +613,22 @@ const docTemplate = `{
                 ],
                 "summary": "Detail cart",
                 "parameters": [
+                    {
+                        "description": "the body to create Address",
+                        "name": "Body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.AddressCreateDTO"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "string",
                         "description": "id",
@@ -1156,6 +1244,11 @@ const docTemplate = `{
         },
         "/profile": {
             "get": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
                 "description": "Get list profiles",
                 "consumes": [
                     "application/json"
@@ -1167,6 +1260,15 @@ const docTemplate = `{
                     "Profile"
                 ],
                 "summary": "List profiles",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -1243,6 +1345,11 @@ const docTemplate = `{
         },
         "/profile/{id}": {
             "get": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
                 "description": "Get detail profile",
                 "consumes": [
                     "application/json"
@@ -1255,6 +1362,13 @@ const docTemplate = `{
                 ],
                 "summary": "Detail profile",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "string",
                         "description": "id",
@@ -1436,6 +1550,11 @@ const docTemplate = `{
         },
         "/store": {
             "get": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
                 "description": "Get list stores",
                 "consumes": [
                     "application/json"
@@ -1447,6 +1566,15 @@ const docTemplate = `{
                     "Store"
                 ],
                 "summary": "List stores",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -1517,6 +1645,11 @@ const docTemplate = `{
         },
         "/store/{id}": {
             "get": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
                 "description": "Get detail store",
                 "consumes": [
                     "application/json"
@@ -1529,6 +1662,13 @@ const docTemplate = `{
                 ],
                 "summary": "Detail store",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "string",
                         "description": "id",
@@ -1630,6 +1770,11 @@ const docTemplate = `{
         },
         "/transaction": {
             "get": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
                 "description": "Get list transactions",
                 "consumes": [
                     "application/json"
@@ -1641,6 +1786,15 @@ const docTemplate = `{
                     "Transaction"
                 ],
                 "summary": "List transactions",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -1703,6 +1857,11 @@ const docTemplate = `{
         },
         "/transaction/{id}": {
             "get": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
                 "description": "Get detail transaction",
                 "consumes": [
                     "application/json"
@@ -1715,6 +1874,13 @@ const docTemplate = `{
                 ],
                 "summary": "Detail transaction",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "string",
                         "description": "id",

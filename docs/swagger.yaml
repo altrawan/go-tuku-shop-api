@@ -385,6 +385,18 @@ paths:
       consumes:
       - application/json
       description: Get list Addresss
+      parameters:
+      - description: the body to create Address
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.AddressCreateDTO'
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
       produces:
       - application/json
       responses:
@@ -392,6 +404,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/helper.Response'
+      security:
+      - BearerToken: []
       summary: List Addresss
       tags:
       - Address
@@ -472,6 +486,17 @@ paths:
       - application/json
       description: Get detail Address
       parameters:
+      - description: the body to create Address
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.AddressCreateDTO'
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: id
         in: path
         name: id
@@ -492,6 +517,8 @@ paths:
           description: Not Found
           schema:
             $ref: '#/definitions/helper.Response'
+      security:
+      - BearerToken: []
       summary: Detail Address
       tags:
       - Address
@@ -665,6 +692,18 @@ paths:
       consumes:
       - application/json
       description: Get list carts
+      parameters:
+      - description: the body to create Address
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.AddressCreateDTO'
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
       produces:
       - application/json
       responses:
@@ -672,6 +711,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/helper.Response'
+      security:
+      - BearerToken: []
       summary: List carts
       tags:
       - Cart
@@ -752,6 +793,17 @@ paths:
       - application/json
       description: Get detail cart
       parameters:
+      - description: the body to create Address
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.AddressCreateDTO'
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: id
         in: path
         name: id
@@ -772,6 +824,8 @@ paths:
           description: Not Found
           schema:
             $ref: '#/definitions/helper.Response'
+      security:
+      - BearerToken: []
       summary: Detail cart
       tags:
       - Cart
@@ -1123,6 +1177,12 @@ paths:
       consumes:
       - application/json
       description: Get list profiles
+      parameters:
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
       produces:
       - application/json
       responses:
@@ -1130,6 +1190,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/helper.Response'
+      security:
+      - BearerToken: []
       summary: List profiles
       tags:
       - Profile
@@ -1139,6 +1201,11 @@ paths:
       - application/json
       description: Get detail profile
       parameters:
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: id
         in: path
         name: id
@@ -1159,6 +1226,8 @@ paths:
           description: Not Found
           schema:
             $ref: '#/definitions/helper.Response'
+      security:
+      - BearerToken: []
       summary: Detail profile
       tags:
       - Profile
@@ -1305,6 +1374,12 @@ paths:
       consumes:
       - application/json
       description: Get list stores
+      parameters:
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
       produces:
       - application/json
       responses:
@@ -1312,6 +1387,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/helper.Response'
+      security:
+      - BearerToken: []
       summary: List stores
       tags:
       - Store
@@ -1321,6 +1398,11 @@ paths:
       - application/json
       description: Get detail store
       parameters:
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: id
         in: path
         name: id
@@ -1341,6 +1423,8 @@ paths:
           description: Not Found
           schema:
             $ref: '#/definitions/helper.Response'
+      security:
+      - BearerToken: []
       summary: Detail store
       tags:
       - Store
@@ -1431,6 +1515,12 @@ paths:
       consumes:
       - application/json
       description: Get list transactions
+      parameters:
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
       produces:
       - application/json
       responses:
@@ -1438,6 +1528,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/helper.Response'
+      security:
+      - BearerToken: []
       summary: List transactions
       tags:
       - Transaction
@@ -1510,6 +1602,11 @@ paths:
       - application/json
       description: Get detail transaction
       parameters:
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: id
         in: path
         name: id
@@ -1530,6 +1627,8 @@ paths:
           description: Not Found
           schema:
             $ref: '#/definitions/helper.Response'
+      security:
+      - BearerToken: []
       summary: Detail transaction
       tags:
       - Transaction

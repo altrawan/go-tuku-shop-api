@@ -12,9 +12,11 @@ import (
 type CartService interface {
 	List() []entity.Cart
 	FindByPK(id uint64) entity.Cart
+	FindByUserID(UserID uint64) entity.Cart
 	Store(b dto.CartCreateDTO) entity.Cart
 	Update(b dto.CartUpdateDTO) entity.Cart
 	Delete(b entity.Cart)
+	IsAllowedToEdit(id uint64, userID uint64) bool
 }
 
 type iCartService struct {
@@ -31,6 +33,10 @@ func (s *iCartService) List() []entity.Cart {
 
 func (s *iCartService) FindByPK(id uint64) entity.Cart {
 	return s.repository.FindByPK(id)
+}
+
+func (s *iCartService) FindByUserID(userID uint64) entity.Cart {
+	return s.repository.FindByUserID(userID)
 }
 
 func (s *iCartService) Store(b dto.CartCreateDTO) entity.Cart {
@@ -55,4 +61,9 @@ func (s *iCartService) Update(b dto.CartUpdateDTO) entity.Cart {
 
 func (s *iCartService) Delete(b entity.Cart) {
 	s.repository.Delete(b)
+}
+
+func (s *iCartService) IsAllowedToEdit(id uint64, userID uint64) bool {
+	p := s.repository.FindByUserID(userID)
+	return id == p.UserID
 }

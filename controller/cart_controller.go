@@ -4,6 +4,7 @@ import (
 	"go-tuku-shop-api/dto"
 	"go-tuku-shop-api/entity"
 	"go-tuku-shop-api/helper"
+	"go-tuku-shop-api/security/token"
 	"go-tuku-shop-api/service"
 	"net/http"
 	"strconv"
@@ -89,8 +90,16 @@ func (c *iCartController) Store(ctx *gin.Context) {
 		res := helper.BuildFailedResponse("Failed to process request", err.Error(), helper.EmptyObj{})
 		ctx.JSON(http.StatusBadRequest, res)
 	} else {
+		userId, err := token.ExtractTokenID(ctx)
+		if err != nil {
+			res := helper.BuildFailedResponse("Failed to extract token", err.Error(), helper.EmptyObj{})
+			ctx.JSON(http.StatusInternalServerError, res)
+			return
+		}
+
+		CartCreateDTO.UserID = userId
 		data := c.service.Store(CartCreateDTO)
-		res := helper.BuildSuccessResponse("Success store category", data)
+		res := helper.BuildSuccessResponse("Success store cart", data)
 		ctx.JSON(http.StatusCreated, res)
 	}
 }
@@ -131,9 +140,24 @@ func (c *iCartController) Update(ctx *gin.Context) {
 		return
 	}
 
-	CartUpdateDTO.ID = Cart.ID
-	data := c.service.Update(CartUpdateDTO)
-	res := helper.BuildSuccessResponse("Success update category", data)
+	userId, err := token.ExtractTokenID(ctx)
+	if err != nil {
+		res := helper.BuildFailedResponse("Failed to extract token", err.Error(), helper.EmptyObj{})
+		ctx.JSON(http.StatusInternalServerError, res)
+		return
+	}
+
+	var cart entity.Cart = c.service.FindByUserID(userId)
+	if c.service.IsAllowedToEdit(userId, cart.UserID) {
+		CartUpdateDTO.ID = id
+		CartUpdateDTO.UserID = userId
+		data := c.service.Update(CartUpdateDTO)
+		res := helper.BuildSuccessResponse("Success update cart", data)
+		ctx.JSON(http.StatusOK, res)
+		return
+	}
+
+	res := helper.BuildFailedResponse("You don't have permission", "You are not the owner", helper.EmptyObj{})
 	ctx.JSON(http.StatusOK, res)
 }
 
@@ -147,7 +171,7 @@ func (c *iCartController) Update(ctx *gin.Context) {
 // @Accept json
 // @Produce json
 // @Success 200 {object} helper.Response
-// @Failure 400 {object} helper.Response
+// @Failure 400,500 {object} helper.Response
 // @Router /cart/{id} [delete]
 func (c *iCartController) Delete(ctx *gin.Context) {
 	var Cart entity.Cart
@@ -158,8 +182,21 @@ func (c *iCartController) Delete(ctx *gin.Context) {
 		return
 	}
 
-	Cart.ID = id
-	c.service.Delete(Cart)
-	res := helper.BuildSuccessResponse("Success delete category", helper.EmptyObj{})
+	userId, err := token.ExtractTokenID(ctx)
+	if err != nil {
+		res := helper.BuildFailedResponse("Failed to extract token", err.Error(), helper.EmptyObj{})
+		ctx.JSON(http.StatusInternalServerError, res)
+		return
+	}
+
+	var cart entity.Cart = c.service.FindByUserID(userId)
+	if c.service.IsAllowedToEdit(userId, cart.UserID) {
+		Cart.ID = id
+		c.service.Delete(Cart)
+		res := helper.BuildSuccessResponse("Success delete cart", helper.EmptyObj{})
+		ctx.JSON(http.StatusOK, res)
+	}
+
+	res := helper.BuildFailedResponse("You don't have permission", "You are not the owner", helper.EmptyObj{})
 	ctx.JSON(http.StatusOK, res)
 }

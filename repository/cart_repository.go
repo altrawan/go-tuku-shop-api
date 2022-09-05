@@ -9,6 +9,7 @@ import (
 type CartRepository interface {
 	List() []entity.Cart
 	FindByPK(id uint64) entity.Cart
+	FindByUserID(UserID uint64) entity.Cart
 	Store(b entity.Cart) entity.Cart
 	Update(b entity.Cart) entity.Cart
 	Delete(b entity.Cart)
@@ -32,6 +33,12 @@ func (db *iCartRepository) FindByPK(id uint64) entity.Cart {
 	var Cart entity.Cart
 	db.connection.Preload("Carts").Find(&Cart, id)
 	return Cart
+}
+
+func (db *iCartRepository) FindByUserID(UserID uint64) entity.Cart {
+	var cart entity.Cart
+	db.connection.Where("user_id = ?", UserID).First(&cart)
+	return cart
 }
 
 func (db *iCartRepository) Store(b entity.Cart) entity.Cart {

@@ -422,6 +422,10 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
       security:
       - BearerToken: []
       summary: Store Address
@@ -452,6 +456,10 @@ paths:
             $ref: '#/definitions/helper.Response'
         "400":
           description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
           schema:
             $ref: '#/definitions/helper.Response'
       security:
@@ -521,6 +529,10 @@ paths:
             $ref: '#/definitions/helper.Response'
         "404":
           description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
           schema:
             $ref: '#/definitions/helper.Response'
       security:
@@ -690,6 +702,10 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
       security:
       - BearerToken: []
       summary: Store cart
@@ -793,6 +809,10 @@ paths:
             $ref: '#/definitions/helper.Response'
         "404":
           description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
           schema:
             $ref: '#/definitions/helper.Response'
       security:
@@ -1410,7 +1430,7 @@ paths:
     get:
       consumes:
       - application/json
-      description: Get list Transactions
+      description: Get list transactions
       produces:
       - application/json
       responses:
@@ -1418,13 +1438,13 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/helper.Response'
-      summary: List Transactions
+      summary: List transactions
       tags:
       - Transaction
     post:
       consumes:
       - application/json
-      description: Post Transaction
+      description: Post transaction
       parameters:
       - description: the body to create Transaction
         in: body
@@ -1450,14 +1470,14 @@ paths:
             $ref: '#/definitions/helper.Response'
       security:
       - BearerToken: []
-      summary: Store Transaction
+      summary: Store transaction
       tags:
       - Transaction
   /transaction/{id}:
     delete:
       consumes:
       - application/json
-      description: Delete Transaction
+      description: Delete transaction
       parameters:
       - description: id
         in: path
@@ -1482,13 +1502,13 @@ paths:
             $ref: '#/definitions/helper.Response'
       security:
       - BearerToken: []
-      summary: Delete Transaction
+      summary: Delete transaction
       tags:
       - Transaction
     get:
       consumes:
       - application/json
-      description: Get detail Transaction
+      description: Get detail transaction
       parameters:
       - description: id
         in: path
@@ -1510,14 +1530,14 @@ paths:
           description: Not Found
           schema:
             $ref: '#/definitions/helper.Response'
-      summary: Detail Transaction
+      summary: Detail transaction
       tags:
       - Transaction
   /transaction/{id}/address:
     put:
       consumes:
       - application/json
-      description: Update Transaction
+      description: Update transaction address
       parameters:
       - description: id
         in: path
@@ -1552,14 +1572,14 @@ paths:
             $ref: '#/definitions/helper.Response'
       security:
       - BearerToken: []
-      summary: Update Transaction
+      summary: Update transaction address
       tags:
       - Transaction
   /transaction/{id}/payment:
     put:
       consumes:
       - application/json
-      description: Update Transaction
+      description: Update transaction payment
       parameters:
       - description: id
         in: path
@@ -1594,7 +1614,7 @@ paths:
             $ref: '#/definitions/helper.Response'
       security:
       - BearerToken: []
-      summary: Update Transaction
+      summary: Update Transaction Payment
       tags:
       - Transaction
 swagger: "2.0"

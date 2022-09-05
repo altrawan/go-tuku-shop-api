@@ -85,6 +85,12 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/helper.Response"
                         }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/helper.Response"
+                        }
                     }
                 }
             }
@@ -192,6 +198,12 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/helper.Response"
                         }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/helper.Response"
+                        }
                     }
                 }
             },
@@ -237,6 +249,12 @@ const docTemplate = `{
                     },
                     "400": {
                         "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/helper.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
                         "schema": {
                             "$ref": "#/definitions/helper.Response"
                         }
@@ -499,6 +517,12 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/helper.Response"
                         }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/helper.Response"
+                        }
                     }
                 }
             }
@@ -603,6 +627,12 @@ const docTemplate = `{
                     },
                     "404": {
                         "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/helper.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
                         "schema": {
                             "$ref": "#/definitions/helper.Response"
                         }
@@ -1600,7 +1630,7 @@ const docTemplate = `{
         },
         "/transaction": {
             "get": {
-                "description": "Get list Transactions",
+                "description": "Get list transactions",
                 "consumes": [
                     "application/json"
                 ],
@@ -1610,7 +1640,7 @@ const docTemplate = `{
                 "tags": [
                     "Transaction"
                 ],
-                "summary": "List Transactions",
+                "summary": "List transactions",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -1626,7 +1656,7 @@ const docTemplate = `{
                         "BearerToken": []
                     }
                 ],
-                "description": "Post Transaction",
+                "description": "Post transaction",
                 "consumes": [
                     "application/json"
                 ],
@@ -1636,7 +1666,7 @@ const docTemplate = `{
                 "tags": [
                     "Transaction"
                 ],
-                "summary": "Store Transaction",
+                "summary": "Store transaction",
                 "parameters": [
                     {
                         "description": "the body to create Transaction",
@@ -1673,7 +1703,7 @@ const docTemplate = `{
         },
         "/transaction/{id}": {
             "get": {
-                "description": "Get detail Transaction",
+                "description": "Get detail transaction",
                 "consumes": [
                     "application/json"
                 ],
@@ -1683,7 +1713,7 @@ const docTemplate = `{
                 "tags": [
                     "Transaction"
                 ],
-                "summary": "Detail Transaction",
+                "summary": "Detail transaction",
                 "parameters": [
                     {
                         "type": "string",
@@ -1720,7 +1750,7 @@ const docTemplate = `{
                         "BearerToken": []
                     }
                 ],
-                "description": "Delete Transaction",
+                "description": "Delete transaction",
                 "consumes": [
                     "application/json"
                 ],
@@ -1730,7 +1760,7 @@ const docTemplate = `{
                 "tags": [
                     "Transaction"
                 ],
-                "summary": "Delete Transaction",
+                "summary": "Delete transaction",
                 "parameters": [
                     {
                         "type": "string",
@@ -1770,7 +1800,7 @@ const docTemplate = `{
                         "BearerToken": []
                     }
                 ],
-                "description": "Update Transaction",
+                "description": "Update transaction address",
                 "consumes": [
                     "application/json"
                 ],
@@ -1780,7 +1810,7 @@ const docTemplate = `{
                 "tags": [
                     "Transaction"
                 ],
-                "summary": "Update Transaction",
+                "summary": "Update transaction address",
                 "parameters": [
                     {
                         "type": "string",
@@ -1835,7 +1865,7 @@ const docTemplate = `{
                         "BearerToken": []
                     }
                 ],
-                "description": "Update Transaction",
+                "description": "Update transaction payment",
                 "consumes": [
                     "application/json"
                 ],
@@ -1845,7 +1875,7 @@ const docTemplate = `{
                 "tags": [
                     "Transaction"
                 ],
-                "summary": "Update Transaction",
+                "summary": "Update Transaction Payment",
                 "parameters": [
                     {
                         "type": "string",

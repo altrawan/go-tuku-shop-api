@@ -32,6 +32,8 @@ func NewProfileController(s service.ProfileService) ProfileController {
 // @Summary List profiles
 // @Description Get list profiles
 // @Tags Profile
+// @Param Authorization header string true "Authorization. How to input in swagger : 'Bearer <insert_your_token_here>'"
+// @Security BearerToken
 // @Accept json
 // @Produce json
 // @Success 200 {object} helper.Response
@@ -46,6 +48,8 @@ func (c *iProfileController) List(ctx *gin.Context) {
 // @Summary Detail profile
 // @Description Get detail profile
 // @Tags Profile
+// @Param Authorization header string true "Authorization. How to input in swagger : 'Bearer <insert_your_token_here>'"
+// @Security BearerToken
 // @Param id path string true "id"
 // @Accept json
 // @Produce json

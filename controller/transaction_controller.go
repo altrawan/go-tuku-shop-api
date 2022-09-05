@@ -34,6 +34,8 @@ func NewTransactionController(s service.TransactionService) TransactionControlle
 // @Summary List transactions
 // @Description Get list transactions
 // @Tags Transaction
+// @Param Authorization header string true "Authorization. How to input in swagger : 'Bearer <insert_your_token_here>'"
+// @Security BearerToken
 // @Accept json
 // @Produce json
 // @Success 200 {object} helper.Response
@@ -48,6 +50,8 @@ func (c *iTransactionController) List(ctx *gin.Context) {
 // @Summary Detail transaction
 // @Description Get detail transaction
 // @Tags Transaction
+// @Param Authorization header string true "Authorization. How to input in swagger : 'Bearer <insert_your_token_here>'"
+// @Security BearerToken
 // @Param id path string true "id"
 // @Accept json
 // @Produce json

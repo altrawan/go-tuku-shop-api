@@ -32,6 +32,9 @@ func NewCartController(s service.CartService) CartController {
 // @Summary List carts
 // @Description Get list carts
 // @Tags Cart
+// @Param Body body dto.AddressCreateDTO true "the body to create Address"
+// @Param Authorization header string true "Authorization. How to input in swagger : 'Bearer <insert_your_token_here>'"
+// @Security BearerToken
 // @Accept json
 // @Produce json
 // @Success 200 {object} helper.Response
@@ -46,6 +49,9 @@ func (c *iCartController) List(ctx *gin.Context) {
 // @Summary Detail cart
 // @Description Get detail cart
 // @Tags Cart
+// @Param Body body dto.AddressCreateDTO true "the body to create Address"
+// @Param Authorization header string true "Authorization. How to input in swagger : 'Bearer <insert_your_token_here>'"
+// @Security BearerToken
 // @Param id path string true "id"
 // @Accept json
 // @Produce json

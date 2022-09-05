@@ -33,6 +33,8 @@ func NewStoreController(s service.StoreService) StoreController {
 // @Summary List stores
 // @Description Get list stores
 // @Tags Store
+// @Param Authorization header string true "Authorization. How to input in swagger : 'Bearer <insert_your_token_here>'"
+// @Security BearerToken
 // @Accept json
 // @Produce json
 // @Success 200 {object} helper.Response
@@ -47,6 +49,8 @@ func (c *iStoreController) List(ctx *gin.Context) {
 // @Summary Detail store
 // @Description Get detail store
 // @Tags Store
+// @Param Authorization header string true "Authorization. How to input in swagger : 'Bearer <insert_your_token_here>'"
+// @Security BearerToken
 // @Param id path string true "id"
 // @Accept json
 // @Produce json

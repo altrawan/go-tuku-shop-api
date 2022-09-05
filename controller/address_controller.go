@@ -32,6 +32,9 @@ func NewAddressController(s service.AddressService) AddressController {
 // @Summary List Addresss
 // @Description Get list Addresss
 // @Tags Address
+// @Param Body body dto.AddressCreateDTO true "the body to create Address"
+// @Param Authorization header string true "Authorization. How to input in swagger : 'Bearer <insert_your_token_here>'"
+// @Security BearerToken
 // @Accept json
 // @Produce json
 // @Success 200 {object} helper.Response
@@ -46,6 +49,9 @@ func (c *iAddressController) List(ctx *gin.Context) {
 // @Summary Detail Address
 // @Description Get detail Address
 // @Tags Address
+// @Param Body body dto.AddressCreateDTO true "the body to create Address"
+// @Param Authorization header string true "Authorization. How to input in swagger : 'Bearer <insert_your_token_here>'"
+// @Security BearerToken
 // @Param id path string true "id"
 // @Accept json
 // @Produce json

@@ -567,6 +567,88 @@ paths:
       summary: Update Address
       tags:
       - Address
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Logging in to get jwt to access admin, seller or buyer api by roles
+      parameters:
+      - description: the body to login a user
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.LoginDTO'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.Response'
+      summary: Login
+      tags:
+      - Auth
+  /auth/register-buyer:
+    post:
+      consumes:
+      - application/json
+      description: Registering a buyer
+      parameters:
+      - description: the body to register a buyer
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.RegisterBuyerDTO'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+      summary: Register buyer
+      tags:
+      - Auth
+  /auth/register-seller:
+    post:
+      consumes:
+      - application/json
+      description: Registering a seller
+      parameters:
+      - description: the body to register a seller
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.RegisterSellerDTO'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+      summary: Register seller
+      tags:
+      - Auth
   /brand:
     get:
       consumes:
@@ -994,36 +1076,6 @@ paths:
       summary: Update category
       tags:
       - Category
-  /login:
-    post:
-      consumes:
-      - application/json
-      description: Logging in to get jwt to access admin, seller or buyer api by roles
-      parameters:
-      - description: the body to login a user
-        in: body
-        name: Body
-        required: true
-        schema:
-          $ref: '#/definitions/dto.LoginDTO'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/helper.Response'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/helper.Response'
-        "403":
-          description: Forbidden
-          schema:
-            $ref: '#/definitions/helper.Response'
-      summary: Login
-      tags:
-      - Auth
   /product:
     get:
       consumes:
@@ -1317,58 +1369,6 @@ paths:
       summary: Change password profile
       tags:
       - Profile
-  /register-buyer:
-    post:
-      consumes:
-      - application/json
-      description: Registering a buyer
-      parameters:
-      - description: the body to register a buyer
-        in: body
-        name: Body
-        required: true
-        schema:
-          $ref: '#/definitions/dto.RegisterBuyerDTO'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/helper.Response'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/helper.Response'
-      summary: Register buyer
-      tags:
-      - Auth
-  /register-seller:
-    post:
-      consumes:
-      - application/json
-      description: Registering a seller
-      parameters:
-      - description: the body to register a seller
-        in: body
-        name: Body
-        required: true
-        schema:
-          $ref: '#/definitions/dto.RegisterSellerDTO'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/helper.Response'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/helper.Response'
-      summary: Register seller
-      tags:
-      - Auth
   /store:
     get:
       consumes:
